@@ -1,5 +1,13 @@
 apply plugin: "com.android.application"
 
+// 2nd line, add a new apply:
+project.ext.envConfigFiles = [
+    productionDebug: ".env.production",
+    developmentDebug: ".env",
+    stagingDebug: ".env.staging",
+]
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
 import com.android.build.OutputFile
 
 /**
@@ -131,11 +139,12 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.exampleapp"
+        applicationId project.env.get("APP_ID")
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode project.env.get("VERSION_CODE").toInteger()
+        versionName project.env.get("VERSION_NAME")
+        
     }
     splits {
         abi {
@@ -170,7 +179,14 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
-
+    flavorDimensions "default"
+    productFlavors {
+        production {}
+        staging {
+        // We can have build-specific configurations here. Like using applicationIdSuffix to create different package name (ex. ".staging")
+        }
+        development {}
+    }
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->

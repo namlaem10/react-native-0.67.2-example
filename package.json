@@ -4,14 +4,19 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "android:clean": "cd android && ./gradlew clean && cd ..",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "android:staging": "react-native run-android --variant=stagingDebug",
+    "android:dev": "react-native run-android --variant=developmentDebug",
+    "android:prod": "react-native run-android --variant=productionDebug"
   },
   "dependencies": {
     "react": "^17.0.2",
-    "react-native": "0.67.2"
+    "react-native": "0.67.2",
+    "react-native-config": "^1.4.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
