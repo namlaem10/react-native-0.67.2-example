@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "generate": "npx react-native generate-bootsplash ./App/assets/original_icon.png --background-color=2EE59D  --flavor=main",
     "android": "react-native run-android",
     "android:clean": "cd android && ./gradlew clean && cd ..",
     "ios": "react-native run-ios",
@@ -16,6 +17,7 @@
   "dependencies": {
     "react": "^17.0.2",
     "react-native": "0.67.2",
+    "react-native-bootsplash": "^4.1.4",
     "react-native-config": "^1.4.5"
   },
   "devDependencies": {
